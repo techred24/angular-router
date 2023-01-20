@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 
 import {
@@ -22,7 +22,7 @@ export class ProductsComponent {
   showProductDetail = false;
   productChosen: Product | null = null;
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
-
+  @Output() loadMore = new EventEmitter();
   constructor(
     private storeService: StoreService,
     private productsService: ProductsService
@@ -102,4 +102,7 @@ export class ProductsComponent {
   //     this.offset += this.limit;
   //   });
   // }
+  onLoadMore() {
+    this.loadMore.emit()
+  }
 }
